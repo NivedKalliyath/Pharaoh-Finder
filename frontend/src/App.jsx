@@ -1,35 +1,90 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { Shield } from 'lucide-react';
+import CitySelector from './components/CitySelector';
+import ImageUpload from './components/ImageUpload';
+import DetectionResult from './components/DetectionResult';
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(){
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [detectionResult, setDetectionResult] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const handleImageUpload = async (file) =>{
+    setSelectedImage(file);
+    setIsProcessing(true);
+    setDetectionResult(null);
+
+    try{
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('city', selectedCity);
+
+      const response = await fetch('http://localhost:8000/api/detect/',{
+        method: 'POST',
+        body: formData,
+      });
+
+      if(!response.ok){
+        throw new Error('Detection failed');
+      }
+
+      const data = await response.json();
+      setDetectionResult({
+        hasAircraft: data.has_aircraft,
+        isEnemy: data.is_enemy,
+      });
+    }
+    catch(error){
+      console.error('Error during detection:', error);
+      alert('Failed to process image. Please try again.');
+    }
+    finally{
+      setIsProcessing(false);
+    }
+  };
+
+  return(
+    <div className="min-h-screen bg-gradient-to-b from-amber-900 to-amber-800 text-amber-100">
+      {/* Header */}
+      <header className="py-6 px-4 bg-amber-950/50">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Shield className="w-8 h-8" />
+            <h1 className="text-2xl font-bold">Egyptian Air Defense System</h1>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-amber-950/30 p-8 rounded-lg backdrop-blur-sm shadow-xl">
+            <h2 className="text-3xl font-bold mb-8 text-center">Aircraft Detection System</h2>
+            
+            <CitySelector 
+              selectedCity={selectedCity} 
+              onSelectCity={setSelectedCity} 
+            />
+
+            {selectedCity && (
+              <ImageUpload 
+                onImageUpload={handleImageUpload}
+                isProcessing={isProcessing}
+              />
+            )}
+
+            {detectionResult && selectedImage && (
+              <DetectionResult 
+                result={detectionResult}
+                cityName={selectedCity}
+              />
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
