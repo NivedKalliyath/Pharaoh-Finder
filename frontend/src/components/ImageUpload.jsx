@@ -26,7 +26,9 @@ function ImageUpload({ onImageUpload }) {
 
   return (
     <div className="mb-8">
-      <h3 className="text-xl font-semibold mb-4">Upload Aircraft Image</h3>
+      <div className="flex justify-center mb-4">
+        <h3 className="text-xl font-semibold mb-4">Upload Aircraft Image</h3>
+      </div>
       <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragging ? 'border-amber-400 bg-amber-950/50' : 'border-amber-700 bg-amber-950/30'
