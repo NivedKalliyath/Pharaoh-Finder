@@ -1,6 +1,5 @@
 // Import Dependencies
 import React, { useState } from 'react';
-import { Shield } from 'lucide-react';
 import CitySelector from './components/CitySelector';
 import ImageUpload from './components/ImageUpload';
 import DetectionResult from './components/DetectionResult';
@@ -57,7 +56,7 @@ function App(){
         <div className="container mx-auto flex items-center justify-between">
           {/* Logo and Title */}
           <div className="flex items-center gap-2">
-            <Shield className="w-8 h-8" />
+            <img src="/favicon.ico" alt="Logo" className="w-8 h-8" />
             <h1 className="text-2xl font-bold">Pharaoh Finder</h1>
           </div>
         </div>

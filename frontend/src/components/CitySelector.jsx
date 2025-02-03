@@ -13,32 +13,52 @@ const cities = [
 
 // CitySelector component
 function CitySelector({ selectedCity, onSelectCity }){
-  return (
+  const firstRow = cities.slice(0, 3);
+  const secondRow = cities.slice(3);
+  return(
     <div className="mb-8">
-      <h3 className="text-xl font-semibold mb-4">Select Your City</h3>
-      {/* Grid layout for city buttons */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Loop through the cities array and generate buttons */}
-        {cities.map((city) => (
-          <button
-            key={city.id} // Each button needs a unique key
-            onClick={() => onSelectCity(city.id)} // Update the selected city when clicked
-            className={`p-4 rounded-lg transition-all duration-300 ${
-              selectedCity === city.id
-                ? 'bg-amber-600 text-amber-50' // Highlight selected city
-                : 'bg-amber-950/40 hover:bg-amber-800/40' // Default style with hover effect
-            }`}
-          >
-            {/* City name with an icon */}
-            <div className="flex items-center gap-2 mb-2">
-              <Pyramid className="w-5 h-5" />
-              <span className="font-bold">{city.name}</span>
-            </div>
-
-            {/* Short description of the city */}
-            <p className="text-sm opacity-80">{city.description}</p>
-          </button>
-        ))}
+      <div className="flex justify-center mb-4">
+        <h3 className="text-xl font-semibold mb-4">Select Your City</h3>
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-3 gap-4">
+        {firstRow.map((city) => (
+            <button
+              key={city.id}
+              onClick={() => onSelectCity(city.id)}
+              className={`p-4 rounded-lg transition-all duration-300 ${
+                selectedCity === city.id
+                  ? 'bg-amber-600 text-amber-50'
+                  : 'bg-amber-950/40 hover:bg-amber-800/40'
+              }`}
+            >
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Pyramid className="w-5 h-5" />
+                <span className="font-bold">{city.name}</span>
+              </div>
+              <p className="text-sm opacity-80">{city.description}</p>
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-4 w-2/3 mx-auto">
+          {secondRow.map((city) => (
+            <button
+              key={city.id}
+              onClick={() => onSelectCity(city.id)}
+              className={`p-4 rounded-lg transition-all duration-300 ${
+                selectedCity === city.id
+                  ? 'bg-amber-600 text-amber-50'
+                  : 'bg-amber-950/40 hover:bg-amber-800/40'
+              }`}
+            >
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Pyramid className="w-5 h-5" />
+                <span className="font-bold">{city.name}</span>
+              </div>
+              <p className="text-sm opacity-80">{city.description}</p>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
