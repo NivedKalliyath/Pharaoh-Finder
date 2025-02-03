@@ -1,0 +1,10 @@
+0 - Horus : 
+F16, A10, F22, F14, Su34, AV8B, Vulcan, F117, U2, Mi24, E7, C390, KF21, Mi26
+1 - Osiris : 
+F18, J20, Rafale, JAS39, A400M, Su24, AH64, KC135, CL415, Be200, AG600, UH60, YF23, Ka27, B21, KAAN
+2 - Anubis : 
+F15, EF2000, C17, B52, Mig31, Tornado, TB2, C5, Tu95, JH7, SR71, An124, XB70, An225, Z19
+3 - Bastet : 
+F35, C2, J10, B1, P3, E2, Su25, Su57, Tu22M, RQ4, CH47, An72, Mi8, An22, TB001
+4 - Ra :
+C130, V22, F4, US2, B2, Mirage2000, H6, Tu160, MQ9, Mig29, Y20, Ka52, Mi28, W27, KJ600, J35
