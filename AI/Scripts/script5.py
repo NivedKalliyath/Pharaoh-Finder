@@ -4,7 +4,7 @@ from ultralytics import YOLO
 
 # Update these paths as needed
 test_images_folder = "/Users/adithyasarma/Desktop/testimages"   # Folder containing your test images
-model_path = "/Users/adithyasarma/Desktop/AI_Aspects/75EpochModel/ModelWeights/best.pt"                # Path to your YOLO model (last.pt)
+model_path = "/Users/adithyasarma/Desktop/Pharaoh-Finder/AI/75EpochModel/ModelWeights/best.pt"                # Path to your YOLO model (last.pt)
 
 # Allowed image extensions
 image_extensions = (".jpg", ".jpeg", ".png")
