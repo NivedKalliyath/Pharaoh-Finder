@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CitySelector from './components/CitySelector';
 import ImageUpload from './components/ImageUpload';
 import DetectionResult from './components/DetectionResult';
-
+ 
 function App(){
   const [selectedCity, setSelectedCity] = useState(''); // State to keep track of the selected city
   const [selectedImage, setSelectedImage] = useState(null); // State to store the uploaded image
@@ -15,30 +15,34 @@ function App(){
     setSelectedImage(file); // Store the uploaded image in state
     setIsProcessing(true); // Show loading indicator
     setDetectionResult(null); // Reset previous results
-
+ 
     try{
       const formData = new FormData();
       formData.append('image', file); // Attach the image file
       formData.append('city', selectedCity); // Attach selected city info
-
+ 
       // Send the image and city to the backend for processing
-      const response = await fetch('http://localhost:8000/api/detect/', {
+      const response = await fetch('http://localhost:8000/api/detect', {
         method: 'POST',
         body: formData,
       });
-
+ 
       if(!response.ok){
         throw new Error('Detection failed'); // Throw an error if the request fails
       }
-
+ 
       // Parse the response from the backend
       const data = await response.json();
-
+ 
       // Store detection results in state
       setDetectionResult({
         hasAircraft: data.has_aircraft, // Whether an aircraft is detected
         isEnemy: data.is_enemy, // Whether aircraft is enemy
+        confidence: data.confidence, // Store confidence value
+        detected_city: data.detected_city, // Store detected city
+        image_url: data.image_url,
       });
+      
     }
     catch(error){
       console.error('Error during detection:', error);
@@ -48,7 +52,7 @@ function App(){
       setIsProcessing(false); // Hide loading indicator
     }
   };
-
+ 
   return(
     <div className="min-h-screen bg-gradient-to-b from-amber-900 to-amber-800 text-amber-100">
       {/* Header Section */}
@@ -61,7 +65,7 @@ function App(){
           </div>
         </div>
       </header>
-
+ 
       {/* Main Content Section */}
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
@@ -86,5 +90,5 @@ function App(){
     </div>
   );
 }
-
+ 
 export default App;

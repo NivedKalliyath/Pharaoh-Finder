@@ -1,6 +1,6 @@
 import React from 'react';
 import { Shield, AlertTriangle } from 'lucide-react';
-
+ 
 function DetectionResult({ result, cityName }) {
   return (
     <div className={`p-6 rounded-lg ${
@@ -25,13 +25,23 @@ function DetectionResult({ result, cityName }) {
           <h3 className="text-xl font-bold mb-2">Detection Results</h3>
           {result.hasAircraft ? (
             result.isEnemy ? (
-              <p className="text-red-200">
-                ⚠️ WARNING: Enemy aircraft detected! This aircraft does not match {cityName}'s defensive pattern.
-              </p>
+              <div>
+                <p className="text-red-200 mb-2">
+                  ⚠️ WARNING: Enemy aircraft detected! This aircraft belongs to {result.detected_city}.
+                </p>
+                <p className="text-red-300 text-sm">
+                  Confidence: {(result.confidence * 100).toFixed(1)}%
+                </p>
+              </div>
             ) : (
-              <p className="text-green-200">
-                ✓ Friendly aircraft detected. Aircraft matches {cityName}'s defensive pattern.
-              </p>
+              <div>
+                <p className="text-green-200 mb-2">
+                  ✓ Friendly aircraft detected. Confirmed {cityName} aircraft.
+                </p>
+                <p className="text-green-300 text-sm">
+                  Confidence: {(result.confidence * 100).toFixed(1)}%
+                </p>
+              </div>
             )
           ) : (
             <p className="text-amber-200">
@@ -40,8 +50,15 @@ function DetectionResult({ result, cityName }) {
           )}
         </div>
       </div>
+ 
+      {/* Display Image with Bounding Box */}
+      {result.image_url && (
+        <div className="mt-4">
+          <img src={result.image_url} alt="Detection Result" className="rounded-lg shadow-lg" />
+        </div>
+      )}
     </div>
   );
 }
-
+ 
 export default DetectionResult;
