@@ -1,0 +1,8 @@
+0 - Horus : 
+F‑117, F‑14, F‑15, F‑16, F‑22, F‑35, F‑4, F‑18, J‑10, J‑20, J‑35, JAS‑39, JF‑17, Mig‑29, Mig‑31, Su‑57, Mirage2000, Rafale, KF‑21, YF‑23, EF‑2000
+1 - Osiris : 
+A‑10, Su‑34, AV‑8B, Vulcan, B‑1, B‑2, B‑21, Tornado, Tu‑22M, Tu‑95, XB‑70, Su‑24, Su‑25, H‑6, Tu‑160, JH‑7, B‑52
+2 - Anubis : 
+FA‑400M, AG‑600, An‑124, An‑22, An‑225, An‑72, C‑130, C‑17, C‑2, C‑390, C‑5, KC‑135, KJ‑600, P‑3, SR‑71, U‑2, US‑2, V‑22, Y‑20, E‑2, E‑7, Be‑200, WZ‑7
+3 - Ra : 
+AH‑64, CH‑47, CL‑415, Ka‑27, Ka‑52, Mi‑24, Mi‑26, Mi‑28, Mi‑8, UH‑60, Z‑19, MQ‑9, RQ‑4, TB‑001, TB‑2, KAAN
