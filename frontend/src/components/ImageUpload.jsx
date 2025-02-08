@@ -2,10 +2,14 @@ import React, { useRef, useState } from 'react';
 import { Upload } from 'lucide-react';
 
 function ImageUpload({ onImageUpload }) {
+  // State to store image preview
   const [preview, setPreview] = useState(null);
+  // State to track drag-and-drop interaction
   const [isDragging, setIsDragging] = useState(false);
+  // Reference to the file input element
   const fileInputRef = useRef(null);
 
+  // Function to handle file selection and update preview
   const handleFile = (file) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -15,6 +19,7 @@ function ImageUpload({ onImageUpload }) {
     onImageUpload(file);
   };
 
+  // Function to handle drag-and-drop image upload
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
@@ -33,20 +38,21 @@ function ImageUpload({ onImageUpload }) {
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragging ? 'border-amber-400 bg-amber-950/50' : 'border-amber-700 bg-amber-950/30'
         }`}
+        // Handles drag-over event
         onDragOver={(e) => {
           e.preventDefault();
           setIsDragging(true);
         }}
+        // Handles drag-leave event
         onDragLeave={() => setIsDragging(false)}
+        // Handles file drop
         onDrop={handleDrop}
       >
         {preview ? (
           <div className="relative">
-            <img
-              src={preview}
-              alt="Preview"
-              className="max-h-64 mx-auto rounded-lg"
-            />
+            {/* Display image preview */}
+            <img src={preview} alt="Preview" className="max-h-64 mx-auto rounded-lg" />
+            {/* Button to clear the selected image */}
             <button
               onClick={() => {
                 setPreview(null);
@@ -63,6 +69,7 @@ function ImageUpload({ onImageUpload }) {
               <Upload className="w-12 h-12 opacity-50" />
               <div>
                 <p className="mb-2">Drag and drop your image here, or</p>
+                {/* Button to trigger file input */}
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="px-4 py-2 bg-amber-700 hover:bg-amber-600 rounded-lg transition-colors"
@@ -71,6 +78,7 @@ function ImageUpload({ onImageUpload }) {
                 </button>
               </div>
             </div>
+            {/* Hidden file input field */}
             <input
               ref={fileInputRef}
               type="file"
