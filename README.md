@@ -66,7 +66,3 @@ Team Name : Five Big Booms!
 * [Nived Kalliyath](https://github.com/NivedKalliyath)
 * [Adithya Sarma](https://github.com/adithyasarma24)
 * [Rushan Dayma](https://github.com/RushanDayma)
-
-```bash
-git clone https://github.com/nxd010/Pharaoh-Finder.git
-cd Pharaoh-Finder
